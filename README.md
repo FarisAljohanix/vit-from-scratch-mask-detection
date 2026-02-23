@@ -1,6 +1,6 @@
 # Vision Transformer From Scratch For Face Mask Detection
 
-![Attention Map](attention_map.png)
+![Attention Map](output.png)
 
 Minimal ViT implementation trained on the Kaggle face-mask dataset:
 `vijaykumar1799/face-mask-detection`.

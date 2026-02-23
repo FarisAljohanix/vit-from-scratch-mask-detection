@@ -22,13 +22,15 @@ def build():
 
     dataset = ImageFolder(root=root_dir, transform=transform)
 
-    train_len = int(len(dataset) * 0.8)
-    val_len = len(dataset) - train_len
+    train_len = int(len(dataset) * 0.7)
+    val_len = int(len(dataset) * 0.2)
+    test_len = len(dataset) - (train_len + val_len)
 
-    train_dataset, val_dataset = random_split(dataset, [train_len, val_len])
+    train_dataset, val_dataset, test_dataset = random_split(dataset, [train_len, val_len, test_len])
 
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
     config = Config()
     model = ViTClassification(config)
@@ -36,7 +38,7 @@ def build():
     optimizer = optim.AdamW(model.parameters(), lr=0.01, weight_decay=1e-2)
     criterion = nn.CrossEntropyLoss()
 
-    return model, optimizer, criterion, train_loader, val_loader, dataset, config
+    return model, optimizer, criterion, train_loader, val_loader, test_loader, dataset, config
 
 
 if __name__ == "__main__":

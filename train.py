@@ -32,7 +32,7 @@ def val(model, criterion, data_loader):
 
 
 def train():
-    model, optimizer, criterion, train_loader, val_loader, dataset, config = main.build()
+    model, optimizer, criterion, train_loader, val_loader, _,dataset, config = main.build()
 
     for epoch in range(10):
         train_loss = train_one_epoch(model, optimizer, criterion, train_loader)
